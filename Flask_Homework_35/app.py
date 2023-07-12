@@ -8,16 +8,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('/Users/pavlo/Documents/Python/flask-homework/Flask_Homerowk_35/database.db')
-app.config['SECRET_KEY'] = os.environ.get('1234')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('sqlite:///Users/pavlo/Documents/Python/flask-homework/Flask_Homerowk_35/database.db')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
-
-@app.route('/')
-def index():
-    return 'Hello, World!'
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -154,4 +150,4 @@ def create_purchase():
         return 'User or book not found', 404
 
 if __name__ == '__main__':
-    app.run(host=os.environ.get('HOST', '127.0.0.1'), port=os.environ.get('PORT', 5000))
+    app.run(host=os.environ.get('HOST', 'http://127.0.0.1'), port=os.environ.get('PORT', 5000))
