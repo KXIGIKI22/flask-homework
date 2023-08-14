@@ -1,0 +1,18 @@
+version: "3"
+services:
+  flask_app:
+    build:
+      context: /Users/pavlo/Documents/Python/flask-homework/
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: KXIGIKI
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: Pavlo
